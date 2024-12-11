@@ -2,7 +2,7 @@ const User = require("../models/UserModel");
 // register user
 const registerUser = async (req,res)=>{
     const {name,email,password,phone,profile} = req.body;
-  
+
     try {
       const user = await User.signup(name, email, password,phone,profile);
   
