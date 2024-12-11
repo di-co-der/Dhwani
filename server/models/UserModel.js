@@ -15,16 +15,25 @@ const UserSchema = new mongoose.Schema({
    password:{
     type: String,
     required: true
+   },
+   phone:{
+    type:String,
+    required:true,
+    unique:true
+   },
+   profile:{
+    type:String,
+    required:true
    }
 })
 
 // static signup method
 // we use a regular function instead of a arrow function because in arrow function we cannot use "this" keyword
 
-UserSchema.statics.signup = async function(name,email,password){
+UserSchema.statics.signup = async function(name,email,password,phone,profile){
 
     //validation
-    if(!name || !email || !password){
+    if(!name || !email || !password ||!phone || !profile){
         throw Error("All fields must be filled");
     }
     if(!validator.isEmail(email)){
@@ -43,16 +52,16 @@ UserSchema.statics.signup = async function(name,email,password){
     const salt = await bcrypt.genSalt(10);
     const hash = await bcrypt.hash(password, salt);
 
-    const user = await this.create({name, email, password: hash});
+    const user = await this.create({name, email, password: hash,phone,profile});
     
     return user;
 }
 
 // static login method
-UserSchema.statics.login = async function(email,password){
+UserSchema.statics.login = async function(email,password,profile){
 
     //validation
-    if(!email || !password){
+    if(!email || !password || !profile){
         throw Error("All fields must be fields")
     }
     // if(!validator.isEmail(email)){
@@ -62,13 +71,15 @@ UserSchema.statics.login = async function(email,password){
     if(!user){
         throw Error("Email is not valid")
     }
-
+    if(user.profile!=profile){
+        throw Error("Profile is not valid")
+    }
     // checking password with stored password 
     const exist = await bcrypt.compare(password,user.password);
     if(!exist){
        throw Error("Password is incorrect")
     }
-
+    
     return user;
 }
 module.exports = mongoose.model("User",UserSchema);

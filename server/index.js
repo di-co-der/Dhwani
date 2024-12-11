@@ -1,5 +1,6 @@
 const express = require("express");
 const cors = require("cors");
+const userRouter = require("./routes/userRoutes")
 const app = express();
 
 require("dotenv").config();
@@ -10,7 +11,7 @@ require("./db/connect");
 app.use(cors());
 app.use(express.json());
 
-app.use("/api/student",studentRouter);
+app.use("/api/user",userRouter);
 
 
 app.get("/",(req,res)=>{
