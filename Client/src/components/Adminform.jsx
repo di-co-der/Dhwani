@@ -1,8 +1,8 @@
 import React, { useState, useContext } from 'react';
-import { PatientContext } from './PatientContext';
+// import { PatientContext } from '../pages/PatientContext';
 
 const Adminform = () => {
-  const { setPatients } = useContext(PatientContext);
+//   const { setPatients } = useContext(PatientContext);
 
   const [dateOfBirth, setDob] = useState('');
   const [gender, setGender] = useState('');
@@ -16,17 +16,17 @@ const Adminform = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    const newPatient = {
-      dateOfBirth,
-      gender,
-      appointmentDate,
-      appointmentTime,
-      studentTherapist,
-      disorderType,
-      comment,
-    };
+    // const newPatient = {
+    //   dateOfBirth,
+    //   gender,
+    //   appointmentDate,
+    //   appointmentTime,
+    //   studentTherapist,
+    //   disorderType,
+    //   comment,
+    // };
 
-    setPatients((prevPatients) => [...prevPatients, newPatient]);
+    // setPatients((prevPatients) => [...prevPatients, newPatient]);
     setIsSubmitted(true);
   };
     return (
