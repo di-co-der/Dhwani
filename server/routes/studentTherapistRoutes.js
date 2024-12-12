@@ -3,6 +3,6 @@ const {registerStudentTherapist} = require("../controllers/studentTherapistContr
 const router = express.Router();
 
 
-router.post("/register",registerStudentTherapist);
+router.post("/add",registerStudentTherapist);
 
 module.exports = router;

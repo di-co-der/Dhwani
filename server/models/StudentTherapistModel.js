@@ -91,6 +91,35 @@ StudentTherapistSchema.statics.register = async function(userId){
   return studentTherapist;
 }
 
+// Instance method to add a patient to the therapist's list of patients
+StudentTherapistSchema.methods.addPatient = async function (therapistId, patientId) {
+  // Find the specific therapist document by therapistId
+  const therapist = await this.constructor.findOne({ user: therapistId });
+  
+  if (!therapist) {
+    throw Error("Therapist not found");
+  }
+
+  // Check if the patient already exists in the therapist's list
+  if (therapist.patients.includes(patientId)) {
+    throw Error("Patient is already assigned to this therapist");
+  }
+
+  // Check if the patient exists
+  const patient = await Patient.findOne({ _id: patientId });
+  if (!patient) {
+    throw Error("Patient does not exist");
+  }
+
+  // Add the patient to the therapist's patients list
+  therapist.patients.push(patientId);
+
+  // Save the updated therapist document
+  await therapist.save();
+
+  return therapist;
+};
+
 module.exports = mongoose.model("StudentTherapist", StudentTherapistSchema);
 
 // module.exports = {StudentTherapist };
