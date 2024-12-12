@@ -1,6 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const userRouter = require("./routes/userRoutes")
+const patientRouter = require("./routes/patientRoutes")
 const app = express();
 
 require("dotenv").config();
@@ -12,6 +13,7 @@ app.use(cors());
 app.use(express.json());
 
 app.use("/api/user",userRouter);
+app.use("/api/patient",patientRouter);
 
 
 app.get("/",(req,res)=>{
