@@ -69,23 +69,23 @@ const PatientSchema = new mongoose.Schema({
 // static register method
 // we use a regular function instead of a arrow function because in arrow function we cannot use "this" keyword
 
-PatientSchema.statics.register = async function(firstName,lastName,email,phone,dob,gender,
-  appointmentDate,appointmentTime,typeOfDisorder,comment){
+// PatientSchema.statics.register = async function(firstName,lastName,email,phone,dob,gender,
+//   appointmentDate,appointmentTime,typeOfDisorder,comment){
 
-  //validation
-  if(!firstName || !lastName || !email ||!phone){
-      throw Error("All fields must be filled");
-  }
-  // if(!validator.isEmail(email)){
-  //     throw Error("Email is not valid");
-  // }
+//   //validation
+//   if(!firstName || !lastName || !email ||!phone){
+//       throw Error("All fields must be filled");
+//   }
+//   // if(!validator.isEmail(email)){
+//   //     throw Error("Email is not valid");
+//   // }
 
-  // is email already exits
-  const exists = await this.findOne({email});
+//   // is email already exits
+//   const exists = await this.findOne({email});
 
-  if(exists){
-      throw Error("Email already exists");
-  }
+//   if(exists){
+//       throw Error("Email already exists");
+//   }
   PatientSchema.statics.register = async function(firstName,lastName,email,phone,dob,gender,
   appointmentDate,appointmentTime,typeOfDisorder,comment){
 
@@ -119,4 +119,4 @@ PatientSchema.statics.showPatient = async function(){
  return patients;
 }
 
-module.exports = mongoose.model("Patient", PatientSchema);
+module.exports = mongoose.model("Patient", PatientSchema)
