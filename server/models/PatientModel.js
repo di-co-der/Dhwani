@@ -86,12 +86,37 @@ PatientSchema.statics.register = async function(firstName,lastName,email,phone,d
   if(exists){
       throw Error("Email already exists");
   }
-  PatientSchema.statics.showPatient = async function(){
-   const patients = await this.find({});
+  PatientSchema.statics.register = async function(firstName,lastName,email,phone,dob,gender,
+  appointmentDate,appointmentTime,typeOfDisorder,comment){
+
+  //validation
+  if(!firstName || !lastName || !email ||!phone){
+      throw Error("All fields must be filled");
+  }
+  // if(!validator.isEmail(email)){
+  //     throw Error("Email is not valid");
+  // }
+
+  // is email already exits
+  const exists = await this.findOne({email});
+
+  if(exists){
+      throw Error("Email already exists");
+  }
+
+  const patient = await this.create({firstName,lastName,email,phone,dob,gender,
+    appointmentDate,appointmentTime,typeOfDisorder,comment});
   
-  return patients;
+  return patient;
 }
 
 
+
+
+PatientSchema.statics.showPatient = async function(){
+  const patients = await this.find({});
+ 
+ return patients;
+}
 
 module.exports = mongoose.model("Patient", PatientSchema);
