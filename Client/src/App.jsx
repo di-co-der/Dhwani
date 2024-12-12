@@ -10,9 +10,11 @@ import ClinicalSupervisor from "./pages/ClinicalSupervisor";
 import StudentTherapist from "./pages/StudentTherapist";
 import Admin from "./pages/Admin";
 import PatientDetails from "./pages/PatientDetails";
+import StudentDetails from "./pages/StudentDetails";
 
 const App = () => {
   const [patients, setPatients] = useState([]); // State to hold patient data
+  const [students, setStudents] = useState([]);
 
   return (
     <Router>
@@ -30,6 +32,10 @@ const App = () => {
         <Route
           path="/patient/:id"
           element={<PatientDetails patients={patients} />}
+        />
+                <Route
+          path="/student/:id"
+          element={<StudentDetails students={students} />}
         />
       </Routes>
       <Footer />
