@@ -15,18 +15,7 @@ const Adminform = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-
-    // const newPatient = {
-    //   dateOfBirth,
-    //   gender,
-    //   appointmentDate,
-    //   appointmentTime,
-    //   studentTherapist,
-    //   disorderType,
-    //   comment,
-    // };
-
-    // setPatients((prevPatients) => [...prevPatients, newPatient]);
+    
     setIsSubmitted(true);
   };
     return (

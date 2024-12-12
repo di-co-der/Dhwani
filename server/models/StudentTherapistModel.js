@@ -92,9 +92,9 @@ StudentTherapistSchema.statics.register = async function(userId){
 }
 
 // Instance method to add a patient to the therapist's list of patients
-StudentTherapistSchema.methods.addPatient = async function (therapistId, patientId) {
+StudentTherapistSchema.statics.addPatient = async function (therapistId, patientId) {
   // Find the specific therapist document by therapistId
-  const therapist = await this.constructor.findOne({ user: therapistId });
+  const therapist = await this.findOne({ user: therapistId });
   
   if (!therapist) {
     throw Error("Therapist not found");
