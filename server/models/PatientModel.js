@@ -86,11 +86,10 @@ PatientSchema.statics.register = async function(firstName,lastName,email,phone,d
   if(exists){
       throw Error("Email already exists");
   }
-
-  const patient = await this.create({firstName,lastName,email,phone,dob,gender,
-    appointmentDate,appointmentTime,typeOfDisorder,comment});
+  PatientSchema.statics.showPatient = async function(){
+   const patients = await this.find({});
   
-  return patient;
+  return patients;
 }
 
 

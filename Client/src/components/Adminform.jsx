@@ -47,11 +47,10 @@ const Adminform = () => {
 
       // Redirect to login page after successful signup
       navigate("/login");
-    } else {
-      setError(json.error);
     }
-    } catch (error) {
-      
+  }
+     catch (error) {
+      setError(json.error);
     }
     setIsSubmitted(true);
   };

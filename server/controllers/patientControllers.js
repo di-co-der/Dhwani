@@ -27,7 +27,18 @@ const addPatient = async (req,res)=>{
       res.status(400).json({error: error.message})
     }
   }
+    // show all Patients
+const showPatient = async (req,res)=>{
+
+    try {
+      const patients = await Patient.showPatient();
+  
+      res.status(200).json(patients);
+    } catch (error) {
+      res.status(400).json({error: error.message})
+    }
+  }
 
 module.exports = {
-    registerPatient,addPatient
+    registerPatient,addPatient,showPatient
 }
