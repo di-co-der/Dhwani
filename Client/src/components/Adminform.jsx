@@ -1,16 +1,34 @@
-// import React from 'react';
-import React, { useState } from 'react';
-  
+import React, { useState, useContext } from 'react';
+import { PatientContext } from './PatientContext';
 
 const Adminform = () => {
-    const [dateOfBirth, setDob] = useState('');
+  const { setPatients } = useContext(PatientContext);
+
+  const [dateOfBirth, setDob] = useState('');
   const [gender, setGender] = useState('');
   const [appointmentDate, setAppointmentDate] = useState('');
   const [appointmentTime, setAppointmentTime] = useState('');
   const [studentTherapist, setStudentTherapist] = useState('');
   const [disorderType, setDisorderType] = useState('');
   const [comment, setComment] = useState('');
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    const newPatient = {
+      dateOfBirth,
+      gender,
+      appointmentDate,
+      appointmentTime,
+      studentTherapist,
+      disorderType,
+      comment,
+    };
+
+    setPatients((prevPatients) => [...prevPatients, newPatient]);
+    setIsSubmitted(true);
+  };
     return (
         <div>
      <section
@@ -25,7 +43,7 @@ const Adminform = () => {
           {/* <p className="text-gray-600 mb-6 text-lg lg:text-xl text-center lg:text-left">
             Fill in the details to get started!
           </p> */}
-          <form className="w-full max-w-md space-y-4">
+          <form className="w-full max-w-md space-y-4" onSubmit={handleSubmit}>
             {/* First Name */}
             <div>
               <label className="block text-gray-700 mb-2" htmlFor="firstName">
@@ -202,16 +220,14 @@ const Adminform = () => {
               Pay and Register
             </button>
           </form>
+          {isSubmitted && ( // Conditionally render success message
+            <p className="text-green-500 text-center mt-4">
+              Patient registered successfully!
+            </p>
+          )}
         </div>
 
-        {/* Image Section */}
-        {/* <div className="w-full lg:w-6/12 flex items-center justify-center">
-          <img
-            className="w-full max-w-lg object-contain lg:h-screen"
-            src={loginImg}
-            alt="Signup"
-          />
-        </div> */}
+  
       </section>
         </div>
     );
