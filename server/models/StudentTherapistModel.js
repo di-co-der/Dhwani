@@ -72,6 +72,38 @@ const StudentTherapistSchema = new mongoose.Schema(
 // // Export the models
 // const Patient = mongoose.model("Patient", PatientSchema);
 // const User = mongoose.model("User", UserSchema);
-const StudentTherapist = mongoose.model("StudentTherapist", StudentTherapistSchema);
 
-module.exports = {StudentTherapist };
+// static register method
+// we use a regular function instead of a arrow function because in arrow function we cannot use "this" keyword
+
+StudentTherapistSchema.statics.register = async function(userId,patientId){
+
+  // Validation
+  if (!userId) {
+    throw Error("Therapist should be filled");
+  }
+  if (!patientId) {
+    throw Error("Patient should be filled");
+  }
+
+  // Check if the therapist exists
+  const therapist = await User.findOne({ _id: userId });
+  if (!therapist) {
+    throw Error("Therapist does not exist");
+  }
+
+  // Check if the patient exists
+  const patient = await Patient.findOne({ _id: patientId });
+  if (!patient) {
+    throw Error("Patient does not exist");
+  }
+
+  // Create a new StudentTherapist record
+  const studentTherapist = await this.create({ user: userId });
+
+  return studentTherapist;
+}
+
+module.exports = mongoose.model("StudentTherapist", StudentTherapistSchema);
+
+// module.exports = {StudentTherapist };
