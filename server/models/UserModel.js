@@ -1,6 +1,9 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 const validator = require("validator");
+const StudentTherapist = require("./StudentTherapistModel");
+const ClinicalSupervisor = require("./ClinicalSupervisorModel");
+const Admin = require("./AdminModel");
 
 const UserSchema = new mongoose.Schema({
    name:{
@@ -53,7 +56,15 @@ UserSchema.statics.signup = async function(name,email,password,phone,profile){
     const hash = await bcrypt.hash(password, salt);
 
     const user = await this.create({name, email, password: hash,phone,profile});
-    
+    if(profile=="admin"){
+       await Admin.register(user._id);
+    }
+    else if(profile=="studentTherapist"){
+        await StudentTherapist.register(user._id);
+    }
+    else if(profile=="clinicalSupervisor"){
+        await ClinicalSupervisor.register(user._id);
+    }
     return user;
 }
 
