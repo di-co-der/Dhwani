@@ -34,10 +34,10 @@ const Login = () => {
             setError(null);
             localStorage.setItem("user", JSON.stringify(json));
 
-            // Navigate based on user type
-            if (profile === "clinical-supervisor") {
+            // Navigate based on user typ
+            if (profile === "clinicalSupervisor") {
                 navigate("/clinical-supervisor");
-            } else if (profile === "student-therapist") {
+            } else if (profile === "studentTherapist") {
                 navigate("/student-therapist");
             } 
             //else if (profile === "hod") {

@@ -42,7 +42,7 @@ const Signup = () => {
       setError(null);
 
       // Redirect to login page after successful signup
-      navigate("/login");
+      // navigate("/login");
     } else {
       setError(json.error);
     }
