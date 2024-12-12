@@ -35,9 +35,9 @@ const Login = () => {
             localStorage.setItem("user", JSON.stringify(json));
 
             // Navigate based on user type
-            if (profile === "clinical_supervisor") {
+            if (profile === "clinical-supervisor") {
                 navigate("/clinical-supervisor");
-            } else if (profile === "student_therapist") {
+            } else if (profile === "student-therapist") {
                 navigate("/student-therapist");
             } 
             //else if (profile === "hod") {
@@ -67,7 +67,7 @@ const Login = () => {
                                 <input
                                     type="radio"
                                     name="userType"
-                                    value="clinical_supervisor"
+                                    value="clinical-supervisor"
                                     onChange={(e) => setProfile(e.target.value)}
                                     className="mr-2"
                                 />
@@ -77,7 +77,7 @@ const Login = () => {
                                 <input
                                     type="radio"
                                     name="userType"
-                                    value="student_therapist"
+                                    value="student-therapist"
                                     onChange={(e) => setProfile(e.target.value)}
                                     className="mr-2"
                                 />

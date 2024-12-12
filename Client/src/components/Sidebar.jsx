@@ -2,18 +2,18 @@ import React from "react";
 
 const Sidebar = () => {
   return (
-    <div className="w-64 min-h-screen bg-blue-900 text-white flex flex-col transition-all duration-300 mt-14">
+    <div className="w-64 min-h-screen bg-blue-900 text-white flex flex-col transition-all duration-300 ">
         <div className="flex flex-col justify-between h-full">
       {/* Menu Items */}
       <ul className="mt-4 space-y-4 px-4">
         <li className="hover:text-blue-300 cursor-pointer">Dashboard</li>
-        <li className="hover:text-blue-300 cursor-pointer">Notice</li>
-        <li className="hover:text-blue-300 cursor-pointer">Apply for Leave</li>
-        <li className="hover:text-blue-300 cursor-pointer">Attendance</li>
-        <li className="hover:text-blue-300 cursor-pointer">Holiday</li>
-        <li className="hover:text-blue-300 cursor-pointer">Employee Detail</li>
-        <li className="hover:text-blue-300 cursor-pointer">Calendar</li>
-        <li className="hover:text-blue-300 cursor-pointer">Claim</li>
+        <li className="hover:text-blue-300 cursor-pointer">Staff</li>
+        <li className="hover:text-blue-300 cursor-pointer">Lab</li>
+        <li className="hover:text-blue-300 cursor-pointer">Ward</li>
+        <li className="hover:text-blue-300 cursor-pointer">Treatment</li>
+        <li className="hover:text-blue-300 cursor-pointer">Pharmacy</li>
+        <li className="hover:text-blue-300 cursor-pointer">Patient</li>
+        {/* <li className="hover:text-blue-300 cursor-pointer">Claim</li> */}
       </ul>
 
       {/* Logout Section */}
