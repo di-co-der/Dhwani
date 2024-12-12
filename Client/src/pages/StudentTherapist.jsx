@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const StudentTherapist = () => {
@@ -34,6 +34,7 @@ const StudentTherapist = () => {
         setError(json.error);
       }
    }
+   fetchPatients();
   },[])
   // Function to handle row click
   const handlePatientClick = (patientId) => {
@@ -58,12 +59,12 @@ const StudentTherapist = () => {
             <tbody>
               {patients?.map((ele,ind)=>{
                   return (
-                    <tr
+                    <tr key={ind}
                 className="bg-gray-200 cursor-pointer"
-                onClick={() => handlePatientClick(1)} // Patient ID 1
+                 // Patient ID 1
               >
                 <td className="py-3 px-4 text-sm text-gray-700">{ind+1}</td>
-                <td className="py-3 px-4 text-sm text-gray-700">{ele.firstName} {ele.lastName}</td>
+                <td className="py-3 px-4 text-sm text-gray-700" onClick={() => handlePatientClick(1)}>{ele.firstName} {ele.lastName}</td>
                 <td className="py-3 px-4 text-sm text-gray-700">{ele.appointmentDate}</td>
                 <td className="py-3 px-4 text-sm text-gray-700">{ele.appointmentTime}</td>
                 <td className="py-3 px-4 text-sm text-gray-700">

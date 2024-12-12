@@ -124,8 +124,8 @@ const Signup = () => {
                 required
               >
                 <option value="admin">Admin</option>
-                <option value="clinical-supervisor">clinical-supervisor</option>
-                <option value="student-therapist">student-therapist</option>
+                <option value="clinicalSupervisor">clinical-supervisor</option>
+                <option value="studentTherapist">student-therapist</option>
               </select>
             </div>
 
