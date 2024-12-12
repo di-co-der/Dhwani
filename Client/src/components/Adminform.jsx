@@ -179,8 +179,8 @@ const Adminform = () => {
 
             {/* Disorder Type */}
             <div>
-              <label className="block text-gray-700 mb-2" htmlFor="disorderType">
-                Disorder Type
+              <label className="block text-gray-700 mb-2" htmlFor="typeofDisorder">
+                Type of Disorder
               </label>
               <select
                 id="disorderType"

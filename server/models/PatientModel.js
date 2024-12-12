@@ -35,7 +35,7 @@ const PatientSchema = new mongoose.Schema({
     }
   },
   dob: {
-    type: Date,
+    type: String,
     required: true
   },
   gender: {
@@ -44,7 +44,7 @@ const PatientSchema = new mongoose.Schema({
     required: true
   },
   appointmentDate: {
-    type: Date,
+    type: String,
     required: true
   },
   appointmentTime: {
@@ -63,8 +63,8 @@ const PatientSchema = new mongoose.Schema({
   timestamps: true // Adds createdAt and updatedAt timestamps
 });
 
-// Export the Patient model
-const Patient = mongoose.model("Patient", PatientSchema);
+// // Export the Patient model
+// const Patient = mongoose.model("Patient", PatientSchema);
 
 // static register method
 // we use a regular function instead of a arrow function because in arrow function we cannot use "this" keyword
@@ -95,4 +95,4 @@ PatientSchema.statics.register = async function(firstName,lastName,email,phone,d
 
 
 
-module.exports = Patient;
+module.exports = mongoose.model("Patient", PatientSchema);
