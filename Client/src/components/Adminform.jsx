@@ -1,23 +1,66 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 // import { PatientContext } from '../pages/PatientContext';
 
 const Adminform = () => {
 //   const { setPatients } = useContext(PatientContext);
-
-  const [dateOfBirth, setDob] = useState('');
+  const [firstName,setFirstName] = useState("");
+  const [lastName,setLastName] = useState("");
+  const [email,setEmail] = useState("");
+  const [phone,setPhone] = useState("");
+  const [dob, setDob] = useState('');
   const [gender, setGender] = useState('');
   const [appointmentDate, setAppointmentDate] = useState('');
   const [appointmentTime, setAppointmentTime] = useState('');
   const [studentTherapist, setStudentTherapist] = useState('');
-  const [disorderType, setDisorderType] = useState('');
+  const [typeOfDisorder, setTypeOfDisorder] = useState('');
   const [comment, setComment] = useState('');
   const [isSubmitted, setIsSubmitted] = useState(false);
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async(event) => {
     event.preventDefault();
-    
+    try {
+      
+    const res = await fetch("http://localhost:4000/api/patient/register", {
+      method: "POST",
+      body: JSON.stringify({ firstName,lastName,email,phone,dob,gender,
+        appointmentDate,appointmentTime,typeOfDisorder,comment }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    const json = await res.json();
+
+    if (res.ok) {
+      setFirstName("");
+      setLastName("");
+      setEmail("");
+      setPhone("");
+      setDob("");
+      setGender("");
+      setAppointmentDate("");
+      setAppointmentTime("");
+      setTypeOfDisorder("");
+      setComment("");
+      setProfile("Admin"); // Reset profile to default
+      setError(null);
+
+      // Redirect to login page after successful signup
+      navigate("/login");
+    } else {
+      setError(json.error);
+    }
+    } catch (error) {
+      
+    }
     setIsSubmitted(true);
   };
+  useEffect(()=>{
+   const fetchStudentTherapists = async()=>{
+       
+   }
+
+  },[]);
     return (
         <div>
      <section
@@ -43,6 +86,8 @@ const Adminform = () => {
                 type="text"
                 className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
                 placeholder="Enter first name"
+                value={firstName}
+                onChange={(e)=>setFirstName(e.target.value)}
                 required
               />
             </div>
@@ -56,6 +101,8 @@ const Adminform = () => {
                 type="text"
                 className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
                 placeholder="Enter last name"
+                value={lastName}
+                onChange={(e)=>setLastName(e.target.value)}
                 required
               />
             </div>
@@ -70,6 +117,8 @@ const Adminform = () => {
                 type="email"
                 className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
                 placeholder="Enter email"
+                value={email}
+                onChange={(e)=>setEmail(e.target.value)}
                 required
               />
             </div>
@@ -85,6 +134,8 @@ const Adminform = () => {
                 className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
                 placeholder="Enter phone number"
                 required
+                value={phone}
+                onChange={(e)=>setPhone(e.target.value)}
               />
             </div>
 
@@ -96,9 +147,9 @@ const Adminform = () => {
               <input
                 id="dob"
                 type="date"
-                value={dateOfBirth}
-                onChange={(e) => setDob(e.target.value)}
                 className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                value={dob}
+                onChange={(e)=>setDob(e.target.value)}
               />
             </div>
 
@@ -173,8 +224,8 @@ const Adminform = () => {
               </label>
               <select
                 id="disorderType"
-                value={disorderType}
-                onChange={(e) => setDisorderType(e.target.value)}
+                value={typeOfDisorder}
+                onChange={(e) => setTypeOfDisorder(e.target.value)}
                 className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
               >
                 <option value="">Select Disorder Type</option>
