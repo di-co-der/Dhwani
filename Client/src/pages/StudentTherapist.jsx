@@ -1,9 +1,40 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const StudentTherapist = () => {
   const navigate = useNavigate();
-
+  const [patients,setPatients] = useState([]);
+  useEffect(()=>{
+   const fetchPatients = async()=>{
+    try {
+      
+      const res = await fetch("http://localhost:4000/api/patient/showpatient");
+  
+      const json = await res.json();
+      setPatients(json);
+      // if (res.ok) {
+      //   setFirstName("");
+      //   setLastName("");
+      //   setEmail("");
+      //   setPhone("");
+      //   setDob("");
+      //   setGender("");
+      //   setAppointmentDate("");
+      //   setAppointmentTime("");
+      //   setTypeOfDisorder("");
+      //   setComment("");
+      //   setProfile("Admin"); // Reset profile to default
+      //   setError(null);
+  
+      //   // Redirect to login page after successful signup
+      //   navigate("/login");
+      // }
+    }
+       catch (error) {
+        setError(json.error);
+      }
+   }
+  },[])
   // Function to handle row click
   const handlePatientClick = (patientId) => {
     navigate(`/patient/${patientId}`); // Replace `/patient/${patientId}` with your desired route
@@ -25,21 +56,28 @@ const StudentTherapist = () => {
               </tr>
             </thead>
             <tbody>
-              <tr
+              {patients?.map((ele,ind)=>{
+                  return (
+                    <tr
                 className="bg-gray-200 cursor-pointer"
                 onClick={() => handlePatientClick(1)} // Patient ID 1
               >
-                <td className="py-3 px-4 text-sm text-gray-700">1.</td>
-                <td className="py-3 px-4 text-sm text-gray-700">Patient 1</td>
-                <td className="py-3 px-4 text-sm text-gray-700">dd/mm/yyyy</td>
-                <td className="py-3 px-4 text-sm text-gray-700">hh:mm</td>
+                <td className="py-3 px-4 text-sm text-gray-700">{ind+1}</td>
+                <td className="py-3 px-4 text-sm text-gray-700">{ele.firstName} {ele.lastName}</td>
+                <td className="py-3 px-4 text-sm text-gray-700">{ele.appointmentDate}</td>
+                <td className="py-3 px-4 text-sm text-gray-700">{ele.appointmentTime}</td>
                 <td className="py-3 px-4 text-sm text-gray-700">
                   <select className="bg-gray-200 text-gray-700">
                     <option>Unmarked</option>
+                    <option>Marked</option>
+                    <option>Completed</option>
                   </select>
                 </td>
               </tr>
-              <tr
+                  )
+              })}
+              
+              {/* <tr
                 className="bg-gray-200 cursor-pointer"
                 onClick={() => handlePatientClick(2)} // Patient ID 2
               >
@@ -65,8 +103,8 @@ const StudentTherapist = () => {
                   <select className="bg-gray-200 text-gray-700">
                     <option>Unmarked</option>
                   </select>
-                </td>
-              </tr>
+                </td> */}
+              {/* </tr> */}
             </tbody>
           </table>
         </div>
